@@ -2,34 +2,43 @@
 <html>
 <body>
 
-<input type="text" id="text" placeholder="For Translation">
+<h2>Translator</h2>
 
-<select id="lang">
-<option value="H">Hindi</option>
-<option value="M">Marathi</option>
-<option value="F">French</option>
-<option value="J">Japanese</option>
-<option value="S">Spanish</option>
+<input type="text" id="textInput"
+placeholder="For Translation">
+
+<select id="language">
+<option value="hi">Hindi</option>
+<option value="mr">Marathi</option>
+<option value="fr">French</option>
+<option value="es">Spanish</option>
+<option value="ja">Japanese</option>
 </select>
 
-<button onclick="translate()">Translate</button>
+<button onclick="translateText()">
+Translate
+</button>
 
-<p id="output"></p>
+<p id="result"></p>
 
 <script>
-async function translate() {
-let text=document.getElementById("text").value;
-let lang=document.getElementById("lang").value;
+async function translateText(){
 
-let response=await fetch(
+let text =
+document.getElementById("textInput").value;
+
+let lang =
+document.getElementById("language").value;
+
+let response = await fetch(
 "https://api.mymemory.translated.net/get?q="
-+encodeURIComponent(text)
++ encodeURIComponent(text)
 +"&langpair=en|"+lang
 );
 
-let data=await response.json();
+let data = await response.json();
 
-document.getElementById("output").innerText=
+document.getElementById("result").innerText =
 data.responseData.translatedText;
 }
 </script>
