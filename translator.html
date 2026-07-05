@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html>
+<body>
+
+<input type="text" id="text" placeholder="For Translation">
+
+<select id="lang">
+<option value="H">Hindi</option>
+<option value="M">Marathi</option>
+<option value="F">French</option>
+<option value="J">Japanese</option>
+<option value="S">Spanish</option>
+</select>
+
+<button onclick="translate()">Translate</button>
+
+<p id="output"></p>
+
+<script>
+async function translate() {
+let text=document.getElementById("text").value;
+let lang=document.getElementById("lang").value;
+
+let response=await fetch(
+"https://api.mymemory.translated.net/get?q="
++encodeURIComponent(text)
++"&langpair=en|"+lang
+);
+
+let data=await response.json();
+
+document.getElementById("output").innerText=
+data.responseData.translatedText;
+}
+</script>
+
+</body>
+</html>
